@@ -7,6 +7,18 @@ public class Practise {
 	
 	static int globalCounter=0;
 	public static void main(String[] args) {
+		Set<Character> vowels = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
+		System.out.println("cycle rotate is " + cycleRotate('c'));
+		
+		
+		
+		String s = "surya";
+		System.out.println("substring(2) : " + s.substring(2));
+		System.out.println("substring(0, 2) : " + s.substring(0,2));
+		System.out.println("substring(0, 3) : " + s.indexOf("sur"));
+		
+		
+		System.out.println((int) 'a');
 		
 		int [] arr= new int[] {2,3,7,8, 10};
 		int expectedSum=19;
@@ -69,6 +81,16 @@ public class Practise {
 		permutations(a, "", permutations);
 		System.out.println("permutations " + permutations.toString());
 
+		String recursionTestString = "Surya";
+		System.out.println("generate all subsequences  of " + recursionTestString);
+		allSubsequences(recursionTestString, 0, "");
+		System.out.println("allSubstringspecific length: 2 " + recursionTestString);
+		allSubsequenceSpecificLength(recursionTestString, 0, 4, "");
+		
+		System.out.println("allSubstrings: " + recursionTestString);
+		allSubstrings(recursionTestString, 0, "");
+		
+		
 		
 	}
 	/*
@@ -217,4 +239,54 @@ public class Practise {
  			permutations(s2, newCurrent, list);
 		}	
 	}
+	
+	
+	static void allSubsequences(String s, int index, String current) {
+		
+		if(index == s.length()) {
+			return ;
+		}
+		
+		String newSubstring = current + s.charAt(index);
+		System.out.println(newSubstring);
+		
+		allSubsequences(s, index+1, newSubstring);
+		allSubsequences(s,index+1, current);
+	}
+	
+	static void allSubsequenceSpecificLength(String s, int index, int length, String current) {
+		if(index == s.length() || current.length()> length) {
+			return ;
+		}
+		String newSubstring = current + s.charAt(index);
+		if(newSubstring.length()==2) {
+			System.out.println(newSubstring);
+		}
+		
+		allSubsequenceSpecificLength(s, index+1, length, newSubstring);
+		allSubsequenceSpecificLength(s,index+1, length, current);
+	}
+	
+	static void allSubstrings(String s, int index, String current) {
+		if(index == s.length()) {
+			return ;
+		}
+		
+		String newSubstring = current + s.charAt(index);
+		System.out.println(newSubstring);
+		
+		allSubstrings(s, index+1, newSubstring);
+		allSubstrings(s,index+1, "");
+	}
+	
+	 static char cycleRotate(char c) {
+		    if (c >= 'a' && c <= 'z') { // Lowercase letters
+		        return c == 'z' ? 'a' : (char) (c + 1);
+		    } else if (c >= 'A' && c <= 'Z') { // Uppercase letters
+		        return c == 'Z' ? 'A' : (char) (c + 1);
+		    } else {
+		        return c; // Non-alphabetic characters remain unchanged
+		    }
+	}
+
 }
